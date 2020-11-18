@@ -3,25 +3,38 @@ package repositories;
 import com.astontech.hr.configuration.RepositoryConfiguration;
 import com.astontech.hr.domain.Element;
 import com.astontech.hr.repositories.ElementRepository;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
 public class ElementRepositoryTest {
     @Autowired
     private ElementRepository elementRepository;
+
+    @Before
+    public void before() {
+        //Runs Before Each Test
+        System.out.println("Before Test");
+    }
+
+    @After
+    public void after() {
+        //Runs After Each Test
+        System.out.println("After Test");
+    }
 
     @Test
     public void testSaveElement() {
@@ -69,6 +82,7 @@ public class ElementRepositoryTest {
         //assertEquals(5, count);
     }
 
+
     @Test
     public void testFindByName() {
         //Create element and save to database
@@ -94,6 +108,35 @@ public class ElementRepositoryTest {
         List<Element> foundAllByNameElement = elementRepository.findAllByElementName("Ice");
 
         //Check the size which should be two since two ices where inserted
-        assertEquals(2, foundAllByNameElement.size());
+        assertEquals(3, foundAllByNameElement.size());
+    }
+
+    @Test
+    public void findAllElemenetExcept() {
+        //Get All elements except Ice
+        List<Element> noIceElements = elementRepository.findByElementNameNot("Ice");
+
+        //Loop over elements and display results plus check elements
+        for(Element element : noIceElements) {
+            System.out.println("Except Method" + element.getElementName());
+            assertNotEquals("Ice", element.getElementName());
+        }
+    }
+
+    @Test
+    public void findAllElementNamedIce() {
+        //Create lowercase and uppercase elements
+        List<Element> elementList = new ArrayList<>();
+        elementList.add(new Element("ice"));
+        elementList.add(new Element("Ice"));
+
+        elementRepository.save(elementList);
+
+        //fetch all elements in database that are ice
+        List<Element> iceElements = elementRepository.findByElementNameIgnoreCase("ice");
+
+        for(Element element : iceElements) {
+            System.out.println("Ignore Case Element: " + element.getElementName());
+        }
     }
 }
