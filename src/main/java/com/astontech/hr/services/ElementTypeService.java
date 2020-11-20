@@ -17,7 +17,7 @@ public interface ElementTypeService {
     void deleteElementType(Integer id);
 
     //Custom Repo Methods
-    ElementType findByElementType(String elementType);
+    ElementType findByElementTypeName(String elementTypeName);
 
-    List<ElementType> findAllByElementType(String elementType);
+    List<ElementType> findAllByElementTypeName(String elementTypeName);
 }

@@ -36,11 +36,11 @@ public class ElementTypeServiceTest {
         assertEquals(elementType.getId(), fetchedElementType.getId());
 
         //update object and send to database
-        fetchedElementType.setElementType("Email");
+        fetchedElementType.setElementTypeName("Email");
         elementTypeService.saveElementType(fetchedElementType);
 
         //Checked Updated element on Element Name
         ElementType updatedElementType = elementTypeService.getElementTypeById(fetchedElementType.getId());
-        assertEquals(updatedElementType.getElementType(), "email");
+        assertEquals(updatedElementType.getElementTypeName(), "email");
     }
 }

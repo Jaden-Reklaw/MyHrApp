@@ -35,11 +35,11 @@ public class ElementTypeRepositoryTest {
         assertEquals(elementType.getId(), fetchedElementType.getId());
 
         //update object and send to database
-        fetchedElementType.setElementType("Email");
+        fetchedElementType.setElementTypeName("Email");
         elementTypeRepository.save(fetchedElementType);
 
         //Checked Updated element on Element Name
         ElementType updatedElementType = elementTypeRepository.findOne(fetchedElementType.getId());
-        assertEquals(updatedElementType.getElementType(), "Email");
+        assertEquals(updatedElementType.getElementTypeName(), "Email");
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface ElementTypeRepository extends CrudRepository<ElementType, Integer> {
     //Add another method to the ElementRepository Interface to implement
     //Auto generate the required code from the structure of the method name
-    ElementType findByElementType(String elementType);
+    ElementType findByElementTypeName(String elementTypeName);
 
-    List<ElementType> findAllByElementType(String elementType);
+    List<ElementType> findAllByElementTypeName(String elementTypeName);
 }

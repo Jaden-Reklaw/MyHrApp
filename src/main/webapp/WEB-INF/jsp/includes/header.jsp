@@ -20,6 +20,10 @@
     <c:url value="/webjars/bootstrap/3.3.4/css/bootstrap.min.css" var="bootstrapCSS" />
     <link href="${bootstrapCSS}" rel="stylesheet" media="screen" />
 
+    <%--Bootswatch free bootstrap themes--%>
+<%--    <c:url value="/static/css/bootswatch.css" var="bootstrapCSS" />--%>
+<%--    <link href="${bootstrapCSS}" rel="stylesheet" media="screen" />--%>
+
     <%--Custom JS--%>
     <c:url value="/static/js/common.js" var="common" />
     <script src="${bootstrapJS}"></script>
