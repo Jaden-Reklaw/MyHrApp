@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class AdminController {
+public class AdminElementController {
 
     @Autowired
     private ElementTypeService elementTypeService;
 
     //Add logging
-    private Logger log = Logger.getLogger(AdminController.class);
+    private Logger log = Logger.getLogger(AdminElementController.class);
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminHome() {
@@ -31,8 +31,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/element/add", method = RequestMethod.GET)
-    public String adminElement(Model model) {
+    public String adminElementGet(Model model) {
         model.addAttribute("elementVO", new ElementVO());
+        model.addAttribute("warningAlert", "visible");
         return "admin/element/element_add";
     }
 
@@ -41,7 +42,17 @@ public class AdminController {
     public String adminElementPost(ElementVO elementVO, Model model) {
         elementVO.splitNewElementsIntoArray();
         logElementVO(elementVO);
+
         saveElementTypeAndElementsVO(elementVO);
+        boolean success = true;
+        if(success) {
+            model.addAttribute("successAlert", "visible");
+        } else {
+            model.addAttribute("errorAlert", "visible");
+        }
+
+        //Clear the form
+        model.addAttribute("elementVO", new ElementVO());
         return "admin/element/element_add";
     }
 
@@ -71,7 +82,13 @@ public class AdminController {
 
         // check if newElement(unbound text box) has a value, add it to the list
         if(!newElement.equals("")) {
-            elementType.getElementList().add(new Element(newElement));
+            if(elementType.getElementList() == null) {
+                List<Element> elementList = new ArrayList<>();
+                elementList.add(new Element(newElement));
+                elementType.setElementList(elementList);
+            } else {
+                elementType.getElementList().add(new Element(newElement));
+            }
         }
 
         //iterate thru the list of elements
@@ -84,6 +101,7 @@ public class AdminController {
         }
 
         elementTypeService.saveElementType(elementType);
+        model.addAttribute("successAlert", "visible");
         return "redirect:/admin/element/edit/" + elementType.getId();
     }
 

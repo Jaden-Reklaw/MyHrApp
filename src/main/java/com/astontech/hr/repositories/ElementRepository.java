@@ -1,7 +1,6 @@
 package com.astontech.hr.repositories;
 
 import com.astontech.hr.domain.Element;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

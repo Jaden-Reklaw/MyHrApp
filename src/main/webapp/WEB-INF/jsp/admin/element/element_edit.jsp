@@ -23,8 +23,8 @@
 
     <%--Side Bar Here--%>
     <%@include file="element_sidebar.jsp" %>
-    <div id="main-wrapper" class="col-md-11 pull-right">
-        <div class="col-lg-8 col-md-7 col-sm-6">
+    <div id="main-wrapper" class="col-sm-10">
+        <div class="col-sm-8">
             <c:set var="idx" value="0" scope="page" />
             <form:form class="form-horizontal" modelAttribute="elementType" action="/admin/element/update" method="post">
                 <form:hidden path="id" />
@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label for="inputElementTypeName" class="col-sm-2 control-label">Element Type</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <form:input path="elementTypeName" type="text" id="inputElementTypeName" cssClass="form-control"/>
                         </div>
                     </div>
@@ -78,6 +78,34 @@
                 </div>
 
             </form:form>
+
+        </div>
+
+        <div class="col-sm-4">
+        <%--Alerts--%>
+            <%--Success Alert--%>
+            <div class="${successAlert == null ? 'hidden' : successAlert}" id="successAlert">
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times</button>
+                    <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+                </div>
+            </div>
+
+            <%--Warning Alert--%>
+            <div class="${warningAlert == null ? 'hidden' : warningAlert}" id="warningAlert">
+                <div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Caution!</strong> <a href="#" class="alert-link">Be careful while you cross the train tracks</a>.
+                </div>
+            </div>
+
+            <%--Error Alert--%>
+            <div class="${errorAlert == null ? 'hidden' : errorAlert}" id="errorAlert">
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+                </div>
+            </div>
 
         </div>
     </div>

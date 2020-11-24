@@ -3,6 +3,7 @@ package com.astontech.hr.services;
 import com.astontech.hr.domain.Element;
 import java.util.List;
 
+//Services are facades
 public interface ElementService {
 
     Iterable<Element> listAllElements();

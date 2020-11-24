@@ -6,8 +6,8 @@
 
     <%--Side Bar Here--%>
     <%@include file="element_sidebar.jsp" %>
-    <div id="main-wrapper" class="col-md-11 pull-right">
-        <div class="col-lg-8 col-md-7 col-sm-6">
+    <div id="main-wrapper" class="col-sm-10">
+        <div class="col-sm-12">
         <%--List of Existing Elements--%>
             <table class="table table-striped table-hover">
                 <thead>
