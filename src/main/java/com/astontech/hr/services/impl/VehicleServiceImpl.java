@@ -32,7 +32,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void deleteElement(Integer id) {
+    public void deleteVehicle(Integer id) {
         vehicleRepository.delete(id);
     }
 }

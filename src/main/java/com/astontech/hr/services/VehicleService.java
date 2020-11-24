@@ -13,5 +13,5 @@ public interface VehicleService {
 
     Iterable<Vehicle> saveVehicleList(Iterable<Vehicle> vehicleIterable);
 
-    void deleteElement(Integer id);
+    void deleteVehicle(Integer id);
 }
