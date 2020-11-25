@@ -4,6 +4,7 @@ import com.astontech.hr.domain.Vehicle;
 import com.astontech.hr.domain.VehicleModel;
 import com.astontech.hr.repositories.VehicleModelRepository;
 import com.astontech.hr.repositories.VehicleRepository;
+import com.astontech.hr.services.VehicleMakeService;
 import com.astontech.hr.services.VehicleModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private VehicleMakeService vehicleMakeService;
 
     @Override
     public Iterable<VehicleModel> listAllVehicleModels() {
@@ -40,9 +44,14 @@ public class VehicleModelServiceImpl implements VehicleModelService {
     @Override
     public void deleteVehicleModel(Integer id) {
         VehicleModel vehicleModel = vehicleModelRepository.findOne(id);
+        // delete any vehicles of this model
         for(Vehicle vehicle: vehicleModel.getVehicleList()) {
             vehicleRepository.delete(vehicle.getId());
         }
+
+        //remove the model from it's parents make list
+        vehicleMakeService.removeVehicleModelFromMake(vehicleModel);
+
         vehicleModelRepository.delete(id);
     }
 }

@@ -9,6 +9,8 @@ import com.astontech.hr.services.VehicleModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VehicleMakeServiceImpl implements VehicleMakeService {
     @Autowired
@@ -44,5 +46,13 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
             vehicleModelService.deleteVehicleModel(vehicleModel.getId());
         }
         vehicleMakeRepository.delete(id);
+    }
+
+    @Override
+    public void removeVehicleModelFromMake(VehicleModel vehicleModel) {
+        VehicleMake make = vehicleMakeRepository.findByVehicleModelListContains(vehicleModel);
+        make.getVehicleModelList().remove(vehicleModel);
+        vehicleMakeRepository.save(make);
+
     }
 }
