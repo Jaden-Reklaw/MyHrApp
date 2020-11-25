@@ -2,8 +2,12 @@ package com.astontech.hr.bootstrap;
 
 import com.astontech.hr.domain.Element;
 import com.astontech.hr.domain.ElementType;
+import com.astontech.hr.domain.VehicleMake;
+import com.astontech.hr.domain.VehicleModel;
 import com.astontech.hr.services.ElementService;
 import com.astontech.hr.services.ElementTypeService;
+import com.astontech.hr.services.VehicleMakeService;
+import com.astontech.hr.services.VehicleModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -20,6 +24,12 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private ElementTypeService elementTypeService;
+
+    @Autowired
+    private VehicleMakeService vehicleMakeService;
+
+    @Autowired
+    private VehicleModelService vehicleModelService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -50,5 +60,25 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         emailType.setElementList(emailList);
 
         elementTypeService.saveElementType(emailType);
+
+        //Vehicle Makes and Vehicle Models
+        VehicleMake mazda = new VehicleMake("Mazda");
+        List<VehicleModel> mazdaList = new ArrayList<>();
+        mazdaList.add(new VehicleModel("CX-3"));
+        mazdaList.add(new VehicleModel("CX-5"));
+        mazdaList.add(new VehicleModel("CX-7"));
+        mazdaList.add(new VehicleModel("CX-9"));
+        mazda.setVehicleModelList(mazdaList);
+        vehicleMakeService.saveVehicleMake(mazda);
+
+        VehicleMake ford = new VehicleMake("Ford");
+        List<VehicleModel> fordList = new ArrayList<>();
+        fordList.add(new VehicleModel("Mustang"));
+        fordList.add(new VehicleModel("Fusion"));
+        fordList.add(new VehicleModel("Explorer"));
+        fordList.add(new VehicleModel("Edge"));
+        mazda.setVehicleModelList(fordList);
+        vehicleMakeService.saveVehicleMake(ford);
+
     }
 }

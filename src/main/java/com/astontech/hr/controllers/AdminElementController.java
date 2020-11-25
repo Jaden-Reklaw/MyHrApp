@@ -60,7 +60,7 @@ public class AdminElementController {
     public String adminElementList(Model model) {
         //connect model to view variable for list
         model.addAttribute("elementTypeList", elementTypeService.listAllElementTypes());
-        return "admin//element/element_list";
+        return "admin/element/element_list";
     }
 
     @RequestMapping(value = "/admin/element/edit/{id}", method = RequestMethod.GET)

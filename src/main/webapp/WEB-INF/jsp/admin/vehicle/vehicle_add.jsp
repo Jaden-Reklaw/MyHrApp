@@ -11,6 +11,9 @@
 
 <div class="wrapper">
 
+    <%--Side Bar Here--%>
+    <%@include file="vehicle_sidebar.jsp" %>
+
     <div id="main-wrapper" class="col-sm-10">
         <div class="col-sm-8">
             <%--Values in post request are connected to the action on element_add AdminController--%>
