@@ -1,9 +1,11 @@
 package com.astontech.hr.controllers;
 
 import com.astontech.hr.domain.VO.VehicleVO;
+import com.astontech.hr.domain.Vehicle;
 import com.astontech.hr.domain.VehicleMake;
 import com.astontech.hr.domain.VehicleModel;
 import com.astontech.hr.services.VehicleMakeService;
+import com.astontech.hr.services.VehicleModelService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ import java.util.List;
 public class AdminVehicleController {
     @Autowired
     private VehicleMakeService vehicleMakeService;
+
+    @Autowired
+    private VehicleModelService vehicleModelService;
 
     //Add logging
     private Logger log = Logger.getLogger(AdminElementController.class);
@@ -57,6 +62,13 @@ public class AdminVehicleController {
         return "admin/vehicle/vehicle_list";
     }
 
+    @RequestMapping(value = "/admin/vehicle/model/list", method = RequestMethod.GET)
+    public String adminVehicleModelList(Model model) {
+        //connect model to view variable for list
+        model.addAttribute("vehicleModelList", vehicleModelService.listAllVehicleModels());
+        return "admin/vehicle/vehicle_model_list";
+    }
+
     @RequestMapping(value = "/admin/vehicle/make/edit/{id}", method = RequestMethod.GET)
     public String vehicleMakeEdit(@PathVariable int id, Model model) {
         VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
@@ -65,10 +77,24 @@ public class AdminVehicleController {
         return "admin/vehicle/vehicle_make_edit";
     }
 
+    @RequestMapping(value = "/admin/vehicle/model/edit/{id}", method = RequestMethod.GET)
+    public String vehicleModelEdit(@PathVariable int id, Model model) {
+        VehicleModel vehicleModel = vehicleModelService.getVehicleModelById(id);
+
+        model.addAttribute("vehicleModel", vehicleModel);
+        return "admin/vehicle/vehicle_model_edit";
+    }
+
     @RequestMapping(value = "/admin/vehicle/make/delete/{id}", method = RequestMethod.GET)
     public String vehicleMakeDelete(@PathVariable int id) {
         vehicleMakeService.deleteVehicleMake(id);
         return "redirect:/admin/vehicle/make/list";
+    }
+
+    @RequestMapping(value = "/admin/vehicle/model/delete/{id}", method = RequestMethod.GET)
+    public String vehicleModelDelete(@PathVariable int id) {
+        vehicleModelService.deleteVehicleModel(id);
+        return "redirect:/admin/vehicle/model/list";
     }
 
     @RequestMapping(value = "/admin/vehicle/make/update", method = RequestMethod.POST)
@@ -99,6 +125,34 @@ public class AdminVehicleController {
         return "redirect:/admin/vehicle/make/edit/" + vehicleMake.getId();
     }
 
+    @RequestMapping(value = "/admin/vehicle/model/update", method = RequestMethod.POST)
+    public String vehicleModelUpdate(VehicleModel vehicleModel, Model model, @RequestParam("inputNewVehiclePlate") String newVehicle){
+
+        // check if newVehicle(unbound text box) has a value, add it to the list
+        if(!newVehicle.equals("")) {
+            if(vehicleModel.getVehicleList() == null) {
+                List<Vehicle> vehicleList = new ArrayList<>();
+                vehicleList.add(new Vehicle(newVehicle));
+                vehicleModel.setVehicleList(vehicleList);
+            } else {
+                vehicleModel.getVehicleList().add(new Vehicle(newVehicle));
+            }
+        }
+
+        //iterate thru the list of elements
+        for(int i=0; i < vehicleModel.getVehicleList().size(); i++) {
+            //check to see if element is blank
+            if(vehicleModel.getVehicleList().get(i).getVehiclePlate().equals("")) {
+                //element name is blank remove it from the list
+                vehicleModel.getVehicleList().remove(i);
+            }
+        }
+
+        vehicleModelService.saveVehicleModel(vehicleModel);
+        model.addAttribute("successAlert", "visible");
+        return "redirect:/admin/vehicle/model/edit/" + vehicleModel.getId();
+    }
+
     //region Custom Helper Methods
     private void saveVehicleMakeAndVehicleVO(VehicleVO vehicleVO) {
         List<VehicleModel> newVehicleModelList = new ArrayList<>();
@@ -111,6 +165,8 @@ public class AdminVehicleController {
 
         vehicleMakeService.saveVehicleMake(newVehicleMake);
     }
+
+
 
     private void logElementVO(VehicleVO vehicleVO) {
         log.info("New Vehicle Make: " + vehicleVO.getNewVehicleMake());

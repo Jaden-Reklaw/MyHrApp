@@ -23,6 +23,10 @@ public class Vehicle {
     public Vehicle() {
     }
 
+    public Vehicle(String vehiclePlate) {
+        this.setVehiclePlate(vehiclePlate);
+    }
+
     public Vehicle(int vehicleYear, String vehiclePlate) {
         this.setVehicleYear(vehicleYear);
         this.setVehiclePlate(vehiclePlate);
