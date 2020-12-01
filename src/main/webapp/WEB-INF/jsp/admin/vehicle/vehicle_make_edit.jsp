@@ -54,6 +54,7 @@
                             <label for="${idx}" class="col-sm-3 control-label" >Vehicle Model</label>
                             <div class="col-sm-7">
                                 <div class="input-group">
+
                                     <form:input path="vehicleModelList[${idx}].vehicleModelName" id="${idx}" cssClass="form-control"/>
                                     <span class="input-group-btn">
                                         <button name="${idx}" class="btn btn-default remove_button" type="button">Remove</button>

@@ -16,7 +16,7 @@ public class VehicleModel {
 
     private String vehicleModelName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Vehicle> vehicleList;
     //endregion
 

@@ -92,8 +92,8 @@ public class AdminVehicleController {
     }
 
     @RequestMapping(value = "/admin/vehicle/model/delete/{id}", method = RequestMethod.GET)
-    public String vehicleModelDelete(@PathVariable int id) {
-        vehicleModelService.deleteVehicleModel(id);
+    public String vehicleModelDelete(@PathVariable(value = "id") int modelId) {
+        vehicleModelService.deleteVehicleModel(modelId);
         return "redirect:/admin/vehicle/model/list";
     }
 
@@ -111,16 +111,20 @@ public class AdminVehicleController {
             }
         }
 
+        VehicleModel vehicleModel = null;
         //iterate thru the list of elements
         for(int i=0; i < vehicleMake.getVehicleModelList().size(); i++) {
             //check to see if element is blank
             if(vehicleMake.getVehicleModelList().get(i).getVehicleModelName().equals("")) {
                 //element name is blank remove it from the list
-                vehicleMake.getVehicleModelList().remove(i);
+                vehicleModel = vehicleMake.getVehicleModelList().get(i);
             }
         }
 
         vehicleMakeService.saveVehicleMake(vehicleMake);
+        if(vehicleModel != null) {
+            vehicleModelService.deleteVehicleModel(vehicleModel.getId());
+        }
         model.addAttribute("successAlert", "visible");
         return "redirect:/admin/vehicle/make/edit/" + vehicleMake.getId();
     }

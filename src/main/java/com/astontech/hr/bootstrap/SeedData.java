@@ -70,5 +70,12 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         mazdaList.add(new VehicleModel("CX-9"));
         mazda.setVehicleModelList(mazdaList);
         vehicleMakeService.saveVehicleMake(mazda);
+
+        VehicleMake ford = new VehicleMake("Ford");
+        List<VehicleModel> fordList = new ArrayList<>();
+        fordList.add(new VehicleModel("Explorer"));
+        fordList.add(new VehicleModel("Fusion"));
+        ford.setVehicleModelList(fordList);
+        vehicleMakeService.saveVehicleMake(ford);
     }
 }

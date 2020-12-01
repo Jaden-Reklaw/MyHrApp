@@ -45,10 +45,6 @@ public class VehicleModelServiceImpl implements VehicleModelService {
     @Override
     public void deleteVehicleModel(Integer id) {
         VehicleModel vehicleModel = vehicleModelRepository.findOne(id);
-        // delete any vehicles of this model
-        for(Vehicle vehicle: vehicleModel.getVehicleList()) {
-            vehicleRepository.delete(vehicle.getId());
-        }
 
         //remove the model from it's parents make list
         vehicleMakeService.removeVehicleModelFromMake(vehicleModel);
