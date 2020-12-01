@@ -15,6 +15,7 @@
                 <%--Page Links--%>
                 <li><a href="/admin/element/add">Element</a></li>
                 <li><a href="/admin/vehicle/add">Vehicle</a></li>
+                    <li><a href="/admin/user/add">User</a></li>
                 <li><a href="/admin/training">Training Modules</a></li>
             </ul>
         </div>

@@ -1,6 +1,7 @@
 package com.astontech.hr.services.impl;
 
 import com.astontech.hr.domain.Vehicle;
+import com.astontech.hr.domain.VehicleMake;
 import com.astontech.hr.domain.VehicleModel;
 import com.astontech.hr.repositories.VehicleModelRepository;
 import com.astontech.hr.repositories.VehicleRepository;
@@ -53,5 +54,13 @@ public class VehicleModelServiceImpl implements VehicleModelService {
         vehicleMakeService.removeVehicleModelFromMake(vehicleModel);
 
         vehicleModelRepository.delete(id);
+    }
+
+    @Override
+    public void removeVehicleFromModel(Vehicle vehicle) {
+        VehicleModel model = vehicleModelRepository.findByVehicleListContains(vehicle);
+        model.getVehicleList().remove(vehicle);
+        vehicleModelRepository.save(model);
+
     }
 }

@@ -1,5 +1,6 @@
 package com.astontech.hr.services;
 
+import com.astontech.hr.domain.Vehicle;
 import com.astontech.hr.domain.VehicleModel;
 
 public interface VehicleModelService {
@@ -12,4 +13,6 @@ public interface VehicleModelService {
     Iterable<VehicleModel> saveVehicleModelList(Iterable<VehicleModel> vehicleModelIterable);
 
     void deleteVehicleModel(Integer id);
+
+    void removeVehicleFromModel(Vehicle vehicle);
 }
