@@ -21,6 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
+        //region ACCESS CONTROL
         httpSecurity
                 //permit all with no authentication
                 //.authorizeRequests().antMatchers("/").permitAll()
@@ -30,11 +31,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //Create authentication for DBA and anything with URL=/console/**
                 .authorizeRequests().antMatchers("/console/**").access("hasRole('ROLE_DBA')");
                 //Create authentication for USER
+        //endregion
 
-        //form login page
-        httpSecurity.formLogin();
+        //region LOGIN PAGE
+        httpSecurity
+                //loginPage is the url to login
+                //loginProcessingUrl is the action on the login form in the jsp
+                .formLogin().loginPage("/login").loginProcessingUrl("/login.do")
+                //defaultSuccessUrl is where to go once login successful
+                //failureUrl goes back to login page but assgin err=1 to be used for erro
+                .defaultSuccessUrl("/").failureUrl("/login?err=1")
+                .usernameParameter("username").passwordParameter("password");
+        //endregion
 
+        //region ADVANCED SETTINGS
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();
+        //endregion
     }
 }

@@ -10,4 +10,9 @@ public class IndexController {
     public String index() {
         return "indexPage";
     }
+
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
 }
