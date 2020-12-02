@@ -7,17 +7,17 @@
     <div class="col-sm-4">
         <form id="form" action="<c:url value='/login.do'/>" method="post">
             <c:if test="${not empty param.err}">
-                <div class="msg-container error">
+                <div class="msg-container error text-white">
                     <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
                 </div>
             </c:if>
             <c:if test="${not empty param.out}">
-                <div class="msg-container logout">
+                <div class="msg-container logout text-white">
                     You've logged out successfully.
                 </div>
             </c:if>
             <c:if test="${not empty param.time}">
-                <div class="msg-container time">
+                <div class="msg-container time text-white">
                     You've been logged out due to inactivity.
                 </div>
             </c:if>
