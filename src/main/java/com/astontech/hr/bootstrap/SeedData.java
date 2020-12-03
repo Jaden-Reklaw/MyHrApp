@@ -33,7 +33,7 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        generateElementAndElementTypes();
+        //generateElementAndElementTypes();
     }
 
     private void generateElementAndElementTypes() {
