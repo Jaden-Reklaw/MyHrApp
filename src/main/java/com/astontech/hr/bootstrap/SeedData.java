@@ -1,13 +1,7 @@
 package com.astontech.hr.bootstrap;
 
-import com.astontech.hr.domain.Element;
-import com.astontech.hr.domain.ElementType;
-import com.astontech.hr.domain.VehicleMake;
-import com.astontech.hr.domain.VehicleModel;
-import com.astontech.hr.services.ElementService;
-import com.astontech.hr.services.ElementTypeService;
-import com.astontech.hr.services.VehicleMakeService;
-import com.astontech.hr.services.VehicleModelService;
+import com.astontech.hr.domain.*;
+import com.astontech.hr.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -20,20 +14,19 @@ import java.util.List;
 public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
-    private ElementService elementService;
-
-    @Autowired
     private ElementTypeService elementTypeService;
 
     @Autowired
     private VehicleMakeService vehicleMakeService;
 
     @Autowired
-    private VehicleModelService vehicleModelService;
+    private EmployeeService employeeService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         //generateElementAndElementTypes();
+        //generateVehicleModelMake();
+        generateEmployees();
     }
 
     private void generateElementAndElementTypes() {
@@ -60,7 +53,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         emailType.setElementList(emailList);
 
         elementTypeService.saveElementType(emailType);
+    }
 
+    private void generateVehicleModelMake() {
         //Vehicle Makes and Vehicle Models
         VehicleMake mazda = new VehicleMake("Mazda");
         List<VehicleModel> mazdaList = new ArrayList<>();
@@ -77,5 +72,31 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         fordList.add(new VehicleModel("Fusion"));
         ford.setVehicleModelList(fordList);
         vehicleMakeService.saveVehicleMake(ford);
+    }
+
+    private void generateEmployees() {
+        Employee employee1 = new Employee();
+        employee1.setFirstName("Jordan");
+        employee1.setLastName("Walker");
+        employee1.setBackground("Java Developer");
+        employeeService.saveEmployee(employee1);
+
+        Employee employee2 = new Employee();
+        employee2.setFirstName("Kelsey");
+        employee2.setLastName("Walker");
+        employee2.setBackground("Nurse");
+        employeeService.saveEmployee(employee2);
+
+        Employee employee3 = new Employee();
+        employee3.setFirstName("Axel");
+        employee3.setLastName("Walker");
+        employee3.setBackground("Rock Star");
+        employeeService.saveEmployee(employee3);
+
+        Employee employee4 = new Employee();
+        employee4.setFirstName("Wayne");
+        employee4.setLastName("Henderson");
+        employee4.setBackground("Project Manager");
+        employeeService.saveEmployee(employee4);
     }
 }
