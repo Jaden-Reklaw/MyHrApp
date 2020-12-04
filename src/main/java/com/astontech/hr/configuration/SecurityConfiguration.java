@@ -105,14 +105,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
 
         //region LOGIN PAGE
-        httpSecurity
-                //loginPage is the url to login
-                //loginProcessingUrl is the action on the login form in the jsp
-                .formLogin().loginPage("/login").loginProcessingUrl("/login.do")
-                //defaultSuccessUrl is where to go once login successful
-                //failureUrl goes back to login page but assgin err=1 to be used for erro
-                .defaultSuccessUrl("/", true).failureUrl("/login?err=1")
-                .usernameParameter("username").passwordParameter("password");
+//        httpSecurity
+//                //loginPage is the url to login
+//                //loginProcessingUrl is the action on the login form in the jsp
+//                .formLogin().loginPage("/login").loginProcessingUrl("/login.do")
+//                //defaultSuccessUrl is where to go once login successful
+//                //failureUrl goes back to login page but assgin err=1 to be used for erro
+//                .defaultSuccessUrl("/", true).failureUrl("/login?err=1")
+//                .usernameParameter("username").passwordParameter("password");
         //endregion
 
 
