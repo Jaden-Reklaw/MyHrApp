@@ -7,7 +7,7 @@
 <div class="container">
     <h2>Employee Page</h2>
 
-    <button onclick="$('#employeeModal').modal('show')" class="btn btn-dark">Add New Employee</button>
+    <button onclick="insertEmployee()" class="btn btn-dark">Add New Employee</button>
 
     <table id="employee-table" class="table table-striped table-hover">
         <thead>
@@ -38,6 +38,9 @@
                     <%--Form--%>
                     <form class="form-horizontal">
                         <fieldset>
+                            <hidden id="employeeId" />
+                            <hidden id="employeeVersion" />
+
                             <div class="form-group">
                                 <label for="inputFirstName" class="col-lg-2 control-label">First Name</label>
                                 <div class="col-lg-10">
@@ -62,6 +65,28 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="saveEmployee()">Save Changes</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you wish to delete? This can not be undone!</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmDelete">Delete Employee</button>
                 </div>
             </div>
 
