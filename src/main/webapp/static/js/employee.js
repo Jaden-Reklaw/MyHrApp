@@ -1,5 +1,6 @@
 $(document).ready(function () {
     buildTable();
+    deleteModal();
 });
 
 function buildTable() {
@@ -12,9 +13,9 @@ function buildTable() {
                     "<td>" + single.id + "</td>" +
                     "<td>" + single.firstName+ " " + single.lastName + "</td>" +
                     "<td>" + single.background + "</td>" +
-                    "<td>" + "<select><option>{Select Project}</option></select>"+ "</td>" +
+                    "<td>" + "<select class='form-control'><option>(Select Project)</option></select>"+ "</td>" +
                     "<td>" + "<button onclick='editEmployee("+ single.id + ")'>Edit</button>" + "</td>" +
-                    "<td>" + "<button onclick='deleteEmployee("+ single.id + ")'>Delete</button>" + "</td>" +
+                    "<td>" + "<button data-toggle='modal' data-target='#confirmDeleteModal' data-record-id='" + single.id + "'>Delete</button>" + "</td>" +
                     "</tr>"
                 );
         });
@@ -84,23 +85,30 @@ function editEmployee(id) {
     });
 }
 
-function deleteEmployee(id) {
-
-    $('#confirmDeleteModal').modal('show');
-
-    $('#confirmDelete').click(function () {
-        $.ajax({
-            type: "Delete",
-            url: "/api/employee/" + id,
-            async: true,
-            dataType: "json",
-            contentType: "application/json",
-            success: function (){
-                window.location.reload();
-            },
-            error: function () {
-                alert("Error Deleting Employee!");
-            }
-        });
-    });
+function deleteModal() {
+    console.log('in deleteModal');
+    // $('#confirmDeleteModal').on('click', '.btn-ok', function (e) {
+    //
+    //     let id = $(this).data('recordId');
+    //     $.ajax({
+    //         type: "delete",
+    //         url: "/api/employee/" + id,
+    //         async: true,
+    //         dataType: "json",
+    //         contentType: "application/json",
+    //         success: function (){
+    //             // window.location.reload();
+    //             console.log('Successfully Delete' + id);
+    //         },
+    //         error: function () {
+    //             alert("Error Deleting Employee!");
+    //         }
+    //     });
+    // });
+    //
+    // $('#confirmDeleteModal').on('show.bs.modal', function (e) {
+    //    let data = $(e.relatedTarget).data();
+    //    $('.btn-ok', this).data('recordId', data.recordId);
+    // });
 }
+
