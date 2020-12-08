@@ -11,7 +11,7 @@ public class Contact extends Person{
     //region Fields
     private String companyName;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses;
     //endregion
 

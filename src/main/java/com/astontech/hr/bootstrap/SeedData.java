@@ -22,11 +22,18 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private ContactService contactService;
+
+    @Autowired
+    private AddressService addressService;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        //generateElementAndElementTypes();
-        //generateVehicleModelMake();
+        generateElementAndElementTypes();
+        generateVehicleModelMake();
         generateEmployees();
+        generateContactAndAddress();
     }
 
     private void generateElementAndElementTypes() {
@@ -98,5 +105,17 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent> {
         employee4.setLastName("Henderson");
         employee4.setBackground("Project Manager");
         employeeService.saveEmployee(employee4);
+    }
+
+    private void generateContactAndAddress() {
+        //Create a contact
+        Contact newContact = new Contact("Bob", "Belcher", "Bob's Burgers");
+        List<Address> allAddresses = new ArrayList<>();
+        Address address1 = new Address("123 Main St. Suite 1", "Connie Island", "NJ", "86753", "Home");
+        Address address2 = new Address("123 Main St. Suite 2", "Connie Island", "NJ", "86753", "Home");
+        allAddresses.add(address1);
+        allAddresses.add(address2);
+        newContact.setAddresses(allAddresses);
+        contactService.saveContact(newContact);
     }
 }
