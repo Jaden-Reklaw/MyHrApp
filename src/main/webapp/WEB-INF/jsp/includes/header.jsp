@@ -15,9 +15,9 @@
     <script src="${jquery}"></script>
 
     <%--Bootstrap--%>
-    <c:url value="/webjars/bootstrap/3.3.4/js/bootstrap.min.js" var="bootstrapJS" />
+    <c:url value="/webjars/bootstrap/4.1.3/js/bootstrap.min.js" var="bootstrapJS" />
     <script src="${bootstrapJS}"></script>
-    <c:url value="/webjars/bootstrap/3.3.4/css/bootstrap.min.css" var="bootstrapCSS" />
+    <c:url value="/webjars/bootstrap/4.1.3/css/bootstrap.min.css" var="bootstrapCSS" />
     <link href="${bootstrapCSS}" rel="stylesheet" media="screen" />
 
     <%--Bootswatch free bootstrap themes--%>

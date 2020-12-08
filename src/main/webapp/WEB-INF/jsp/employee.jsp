@@ -7,7 +7,7 @@
 <div class="container">
     <h2>Employee Page</h2>
 
-    <button onclick="insertEmployee()" class="btn btn-dark">Add New Employee</button>
+    <button onclick="insertEmployee()" class="btn btn-dark m-2">Add New Employee</button>
 
     <table id="employee-table" class="table table-striped table-hover">
         <thead>
@@ -31,8 +31,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Employee Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <%--Form--%>
@@ -77,8 +77,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Confirm Delete</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you wish to delete? This can not be undone!</p>

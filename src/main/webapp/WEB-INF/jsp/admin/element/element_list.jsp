@@ -2,7 +2,7 @@
 <%@include file="../../includes/navbar.jsp" %>
 <%@include file="../../includes/subnav_admin.jsp" %>
 
-<div class="wrapper">
+<div class="d-flex m-4">
 
     <%--Side Bar Here--%>
     <%@include file="element_sidebar.jsp" %>

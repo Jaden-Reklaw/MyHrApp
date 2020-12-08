@@ -87,28 +87,28 @@ function editEmployee(id) {
 
 function deleteModal() {
     console.log('in deleteModal');
-    // $('#confirmDeleteModal').on('click', '.btn-ok', function (e) {
-    //
-    //     let id = $(this).data('recordId');
-    //     $.ajax({
-    //         type: "delete",
-    //         url: "/api/employee/" + id,
-    //         async: true,
-    //         dataType: "json",
-    //         contentType: "application/json",
-    //         success: function (){
-    //             // window.location.reload();
-    //             console.log('Successfully Delete' + id);
-    //         },
-    //         error: function () {
-    //             alert("Error Deleting Employee!");
-    //         }
-    //     });
-    // });
-    //
-    // $('#confirmDeleteModal').on('show.bs.modal', function (e) {
-    //    let data = $(e.relatedTarget).data();
-    //    $('.btn-ok', this).data('recordId', data.recordId);
-    // });
+    $('#confirmDeleteModal').on('click', '.btn-ok', function (e) {
+
+        let id = $(this).data('recordId');
+        $.ajax({
+            type: "delete",
+            url: "/api/employee/" + id,
+            async: true,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (){
+                window.location.reload();
+                console.log('Successfully Delete' + id);
+            },
+            error: function () {
+                alert("Error Deleting Employee!");
+            }
+        });
+    });
+
+    $('#confirmDeleteModal').on('show.bs.modal', function (e) {
+       let data = $(e.relatedTarget).data();
+       $('.btn-ok', this).data('recordId', data.recordId);
+    });
 }
 

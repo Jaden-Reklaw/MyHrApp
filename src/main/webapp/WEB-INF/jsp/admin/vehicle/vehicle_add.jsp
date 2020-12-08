@@ -9,7 +9,7 @@
     });
 </script>
 
-<div class="wrapper">
+<div class="d-flex m-4">
 
     <%--Side Bar Here--%>
     <%@include file="vehicle_sidebar.jsp" %>
